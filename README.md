@@ -16,7 +16,8 @@ This project demonstrates an end-to-end data visualization solution using **AWS 
 
 ## 📊 Dashboard Preview
 
-![Dashboard Screenshot](./assets/Screenshot_2025-06-25_181219.png)
+![Screenshot 2025-06-25 181219](https://github.com/user-attachments/assets/bd8f0856-d0b9-4138-9c19-8177c875ff9f)
+
 
 ---
 
