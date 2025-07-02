@@ -1,0 +1,97 @@
+# 🧼 AWS Glue DataBrew – Data Cleaning Documentation
+
+This document outlines how **AWS Glue DataBrew** was used to clean and prepare a dataset of 1,000 employee records for visualization in Amazon QuickSight.
+
+---
+
+## 📁 Dataset Details
+
+- **Source**: Raw employee data (.csv) uploaded to Amazon S3
+- **Number of Records**: 1,000
+- **Columns**:
+  - `EmployeeID`
+  - `Name`
+  - `Department`
+  - `City`
+  - `Gender`
+  - `Joining Date`
+  - `Salary`
+  - `Status`
+
+---
+
+## 🔧 Step-by-Step Process
+
+### 1. Create a DataBrew Project
+
+- Navigated to **AWS Glue DataBrew**.
+- Selected the dataset from **Amazon S3**.
+- Created a new **project** called `Employee_Cleaning_Project`.
+
+---
+
+### 2. Data Profiling
+
+Enabled profiling to get:
+- Count of nulls and duplicates
+- Data type mismatches
+- Distribution overview of numeric fields
+
+---
+
+### 3. Applied Data Cleaning Steps (Recipe Steps)
+
+Here are the recipe steps applied in order:
+
+| Step No | Action                  | Column(s) Affected | Description |
+|---------|--------------------------|---------------------|-------------|
+| 1       | Remove null values       | All columns         | Removed rows with any missing critical fields |
+| 2       | Drop duplicate rows      | All columns         | Ensured each EmployeeID is unique |
+| 3       | Standardize string case  | Department, City, Gender | Converted to Proper Case for consistency |
+| 4       | Convert data type        | Joining Date        | Ensured it's in `yyyy-mm-dd` format |
+| 5       | Filter active records    | Status              | Included only rows with `Status = Active` |
+| 6       | Remove whitespace        | All string columns  | Trimmed leading/trailing spaces |
+| 7       | Add calculated field     | Year of Joining     | Extracted year from `Joining Date` for trend analysis |
+| 8       | Rename columns           | e.g., "Emp ID" → "EmployeeID" | Standardized column headers |
+
+🧾 All of the above were saved as a **DataBrew Recipe** named: `employee_cleaning_recipe`
+
+---
+
+### 4. Created and Ran a Job
+
+- Created a **Job** called `employee_cleaning_job`
+- Applied the `employee_cleaning_recipe` on the full dataset
+- Output format: `.csv`
+- Destination: Amazon S3 (`s3://your-bucket-name/cleaned_data/`)
+
+---
+
+## ✅ Output Details
+
+- Cleaned file: `cleaned_employees.csv`
+- Total Records After Cleaning: ~950 (depending on nulls/duplicates removed)
+- Ready to be connected as a dataset in **Amazon QuickSight**
+
+---
+
+## 🔁 Reusability
+
+- Recipe can be reused for future datasets with similar schema.
+- Can be scheduled as a recurring job to clean updated employee data periodically.
+
+---
+
+## 📌 Tips
+
+- Use **column-level profiling** for more precise anomaly detection.
+- Recipes are **version-controlled**, so edits are trackable and reversible.
+- Combine multiple datasets using **joins** if needed.
+
+---
+
+## 📎 References
+
+- [AWS Glue DataBrew Documentation](https://docs.aws.amazon.com/databrew/latest/dg/what-is.html)
+- [Transformations List](https://docs.aws.amazon.com/databrew/latest/dg/transformations-list.html)
+
