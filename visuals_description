@@ -1,0 +1,112 @@
+# 📊 Amazon QuickSight – Dashboard & Visuals Documentation
+
+This document outlines how the cleaned employee dataset was used to build an interactive and insightful dashboard in **Amazon QuickSight**.
+
+---
+
+## 🛠️ Setup Steps
+
+### 1. Connect to Dataset
+
+- Opened **Amazon QuickSight**.
+- Selected **New Analysis**.
+- Chose the **cleaned dataset** from Amazon S3 (exported from AWS Glue DataBrew).
+- Performed **data preparation** (validated data types, added calculated fields).
+
+---
+
+### 2. Add Filters
+
+Configured filters to enable user-level interactivity:
+- `Department` – Multi-select dropdown
+- `City` – Multi-select dropdown
+- `Gender` – Single-select dropdown
+
+These filters were added at the **top of the dashboard** to dynamically update all visuals.
+
+---
+
+### 3. Created Visuals
+
+#### 📌 KPI – Total Employees
+- **Visual Type**: KPI Card
+- **Field Used**: `EmployeeID` (count)
+- **Purpose**: Display total number of employees (1,000)
+
+---
+
+#### 📊 Total Salary by EmployeeID
+- **Visual Type**: Horizontal Bar Chart
+- **X-axis**: `Total Salary`
+- **Y-axis**: `EmployeeID`
+- **Purpose**: Shows each employee’s salary contribution
+- **Style**: Orange color with left-aligned labels
+
+---
+
+#### 📊 Employees by Department
+- **Visual Type**: Horizontal Bar Chart
+- **X-axis**: Count of `EmployeeID`
+- **Y-axis**: `Department`
+- **Purpose**: Visualizes how employees are distributed across departments
+
+---
+
+#### 📈 Hiring Trend Over Time
+- **Visual Type**: Line Chart
+- **X-axis**: `Year of Joining` (derived from `Joining Date`)
+- **Y-axis**: Count of `EmployeeID`
+- **Purpose**: Tracks employee hiring trends over time
+
+---
+
+#### 🧁 Gender Split
+- **Visual Type**: Donut Chart
+- **Group By**: `Gender`
+- **Size Field**: Count of `EmployeeID`
+- **Purpose**: Shows distribution of male vs female employees
+
+---
+
+#### 🧁 Count of Records by City
+- **Visual Type**: Pie Chart
+- **Group By**: `City`
+- **Size Field**: Count of `EmployeeID`
+- **Purpose**: Visualize geographic distribution of employees
+
+---
+
+#### 📊 Average Salary by EmployeeID
+- **Visual Type**: Horizontal Bar Chart with Scroll
+- **X-axis**: `Average Salary`
+- **Y-axis**: `EmployeeID`
+- **Purpose**: Helps identify salary trends or outliers
+- **Customization**: Scroll bar enabled due to large number of employee records
+
+---
+
+## 🎨 Dashboard Theme & Layout
+
+- **Theme**: Dark Mode for better readability and modern aesthetics
+- **Chart Color**: Orange highlights for all bars
+- **Visual Arrangement**:
+  - KPI at top-right
+  - Filters at the top
+  - Row-wise structured layout for bar charts, pie/donut, and line chart
+
+---
+
+## 📌 Publishing & Sharing
+
+- Dashboard saved under **My Dashboards**
+- Shared with internal team with **Read-only** permissions
+- Scheduled refresh set to **Daily** from the connected S3 dataset
+
+---
+
+## 📘 References
+
+- [QuickSight Official Documentation](https://docs.aws.amazon.com/quicksight/index.html)
+- [Calculated Fields in QuickSight](https://docs.aws.amazon.com/quicksight/latest/user/calculated-fields.html)
+- [Visual Types and When to Use](https://docs.aws.amazon.com/quicksight/latest/user/types-of-visuals.html)
+
